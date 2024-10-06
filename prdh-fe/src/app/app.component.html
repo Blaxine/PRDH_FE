@@ -1,0 +1,75 @@
+<header></header>
+<div id="content">
+  <div class="content-container">
+    <div class="form-container mt-1 mb-10">
+      <form [formGroup]="datesFormGroup" class="form-container">
+        <mat-form-field>
+          <mat-label>Order Type</mat-label>
+          <mat-select formControlName="orderType">
+            @for (order of orderTypes; track order) {
+            <mat-option [value]="order.value">{{order.display}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Test Type</mat-label>
+          <mat-select formControlName="testType">
+            @for (test of testTypes; track test) {
+            <mat-option [value]="test.value">{{test.display}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Date Created</mat-label>
+          <input matInput formControlName="createdAtStartDate" [matDatepicker]="createdAtStartDate"
+            [max]="maxCreatedDate">
+          <mat-datepicker-toggle matIconSuffix [for]="createdAtStartDate"></mat-datepicker-toggle>
+          <mat-datepicker #createdAtStartDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Date Finalized</mat-label>
+          <input matInput formControlName="createdAtEndDate" [matDatepicker]="createdAtEndDate" [min]="minCreatedDate">
+          <mat-datepicker-toggle matIconSuffix [for]="createdAtEndDate"></mat-datepicker-toggle>
+          <mat-datepicker #createdAtEndDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Sample collected date</mat-label>
+          <input matInput formControlName="sampleCollectedStartDate" [matDatepicker]="sampleCollectedStartDate">
+          <mat-datepicker-toggle matIconSuffix [for]="sampleCollectedStartDate"></mat-datepicker-toggle>
+          <mat-datepicker #sampleCollectedStartDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>sample collected end date</mat-label>
+          <input matInput formControlName="sampleCollectedEndDate" [matDatepicker]="sampleCollectedEndDate">
+          <mat-datepicker-toggle matIconSuffix [for]="sampleCollectedEndDate"></mat-datepicker-toggle>
+          <mat-datepicker #sampleCollectedEndDate></mat-datepicker>
+        </mat-form-field>
+
+      </form>
+
+      <div class="ml-1">
+        <button mat-button (click)="fetchData()" [disabled]="!datesFormGroup.valid || isApiLoading ">
+          <span>Filter</span>
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <mat-slide-toggle (change)="onDemoShowClicked($event.checked)">Demo</mat-slide-toggle>
+      </div>
+    </div>
+
+    @if(displayData){
+    <table-view (pageEventEmiter)="setDisplay($event)" [totalElements]="totalElements"
+      [tableData]="displayData"></table-view>
+    }@else
+    {
+    <span>Filter the data list to show the information brought from the api, Cases minimal api can bring an extensive amount of data from the source database: for a demo of the data 
+      press select demo...
+    </span>
+  
+    }
+  </div>
+</div>
+<router-outlet />

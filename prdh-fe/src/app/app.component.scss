@@ -1,0 +1,30 @@
+app-root {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden !important;
+}
+.form-container {
+    display: flex;
+    flex: 100%;
+    align-items: center;
+    justify-self: center;
+    justify-items: center;
+    gap: 1rem;
+    flex-wrap: wrap!important;
+}
+#content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: calc(100vh - 6rem);
+}
+
+.content-container{
+    height: 100%;
+
+    overflow: auto!important;
+}
+
+.mb-10{
+    margin-bottom: 10px!important;
+}
